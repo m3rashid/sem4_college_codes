@@ -1,0 +1,337 @@
+﻿20BCS033
+MD Rashid Hussain
+DBMS LAB (LAB 1) 
+{ 31st JAN 2022}
+
+
+mysql> CREATE DATABASE 20BCS033_MD_Rashid_Husain;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE 20BCS033_MD_Rashid_Husain;
+Database changed
+
+mysql> CREATE TABLE EMPLOYEE( Fname VARCHAR(15), Minit CHAR, Lname VARCHAR(15) NOT NULL, Ssn CHAR(9) NOT NULL, Bdate DATE, Address VARCHAR(30), Gender CHAR, Salary DECIMAL(10,2), Super_ssn CHAR(9), Dno INT NOT NULL, PRIMARY KEY(Ssn));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> DESCRIBE EMPLOYEE;
++-----------+---------------+------+-----+---------+-------+
+| Field     | Type          | Null | Key | Default | Extra |
++-----------+---------------+------+-----+---------+-------+
+| Fname     | varchar(15)   | YES  |     | NULL    |       |
+| Minit     | char(1)       | YES  |     | NULL    |       |
+| Lname     | varchar(15)   | NO   |     | NULL    |       |
+| Ssn       | char(9)       | NO   | PRI | NULL    |       |
+| Bdate     | date          | YES  |     | NULL    |       |
+| Address   | varchar(30)   | YES  |     | NULL    |       |
+| Gender    | char(1)       | YES  |     | NULL    |       |
+| Salary    | decimal(10,2) | YES  |     | NULL    |       |
+| Super_ssn | char(9)       | YES  |     | NULL    |       |
+| Dno       | int           | NO   |     | NULL    |       |
++-----------+---------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> CREATE TABLE DEPARTMENT(
+    -> Dname VARCHAR(15) NOT NULL, Dnumber INT NOT NULL, Mgr_ssn CHAR(9) NOT NULL, Mgr_start_date DATE, PRIMARY KEY(Dnumber), UNIQUE(Dname), FOREIGN KEY(Mgr_ssn) REFERENCES EMPLOYEE(Ssn));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DESCRIBE DEPARTMENT;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| Dname          | varchar(15) | NO   | UNI | NULL    |       |
+| Dnumber        | int         | NO   | PRI | NULL    |       |
+| Mgr_ssn        | char(9)     | NO   | MUL | NULL    |       |
+| Mgr_start_date | date        | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(
+    -> 'John','B','Smith','123456789','1965-01-09','731 Fondren, Houston, TX','M',30000,'333445555',5);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES( 'Franklin','B','Wong','333445555','1955-12-08','638 Voss, Houston, TX','M',40000,'888665555',5);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES( 'Alicia','J','Zelaya','999887777','1968-01-19','3321
+Castle, Spring, TX','F',25000,'987654321',4);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES( 'Jennifer','S','Wallace','987654321','1941-06-20','29
+1 Berry, Bellaire, TX','F',43000,'888665555',4);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES( 'Ramesh','K','Narayan','666884444','1962-09-15','975
+Fire Oak, Humble, TX','M',38000,'333445555',5);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES( 'Joyce','A','English','453453453','1972-07-31','5631
+Rice, Houston, TX','F',25000,'333445555',5);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES( 'Ahmad','V','Jabbar','987987987','1969-03-29','980 Dallas, Houston, TX','M',25000,'987654321',4);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES( 'James','E','Borg','888665555','1937-11-10','450 Ston
+e, Houston, TX','M',55000,NULL,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM EMPLOYEE;
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| Fname    | Minit | Lname   | Ssn       | Bdate      | Address                  | Gender | Salary   | Super_ssn | Dno |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| John     | B     | Smith   | 123456789 | 1965-01-09 | 731 Fondren, Houston, TX | M      | 30000.00 | 333445555 |   5 |
+| Franklin | B     | Wong    | 333445555 | 1955-12-08 | 638 Voss, Houston, TX    | M      | 40000.00 | 888665555 |   5 |
+| Joyce    | A     | English | 453453453 | 1972-07-31 | 5631 Rice, Houston, TX   | F      | 25000.00 | 333445555 |   5 |
+| Ramesh   | K     | Narayan | 666884444 | 1962-09-15 | 975 Fire Oak, Humble, TX | M      | 38000.00 | 333445555 |   5 |
+| James    | E     | Borg    | 888665555 | 1937-11-10 | 450 Stone, Houston, TX   | M      | 55000.00 | NULL      |   1 |
+| Jennifer | S     | Wallace | 987654321 | 1941-06-20 | 291 Berry, Bellaire, TX  | F      | 43000.00 | 888665555 |   4 |
+| Ahmad    | V     | Jabbar  | 987987987 | 1969-03-29 | 980 Dallas, Houston, TX  | M      | 25000.00 | 987654321 |   4 |
+| Alicia   | J     | Zelaya  | 999887777 | 1968-01-19 | 3321 Castle, Spring, TX  | F      | 25000.00 | 987654321 |   4 |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+
+mysql> UPDATE EMPLOYEE SET Minit='T' WHERE Fname='Franklin';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| Fname    | Minit | Lname   | Ssn       | Bdate      | Address                  | Gender | Salary   | Super_ssn | Dno |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| John     | B     | Smith   | 123456789 | 1965-01-09 | 731 Fondren, Houston, TX | M      | 30000.00 | 333445555 |   5 |
+| Franklin | T     | Wong    | 333445555 | 1955-12-08 | 638 Voss, Houston, TX    | M      | 40000.00 | 888665555 |   5 |
+| Joyce    | A     | English | 453453453 | 1972-07-31 | 5631 Rice, Houston, TX   | F      | 25000.00 | 333445555 |   5 |
+| Ramesh   | K     | Narayan | 666884444 | 1962-09-15 | 975 Fire Oak, Humble, TX | M      | 38000.00 | 333445555 |   5 |
+| James    | E     | Borg    | 888665555 | 1937-11-10 | 450 Stone, Houston, TX   | M      | 55000.00 | NULL      |   1 |
+| Jennifer | S     | Wallace | 987654321 | 1941-06-20 | 291 Berry, Bellaire, TX  | F      | 43000.00 | 888665555 |   4 |
+| Ahmad    | V     | Jabbar  | 987987987 | 1969-03-29 | 980 Dallas, Houston, TX  | M      | 25000.00 | 987654321 |   4 |
+| Alicia   | J     | Zelaya  | 999887777 | 1968-01-19 | 3321 Castle, Spring, TX  | F      | 25000.00 | 987654321 |   4 |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+
+mysql> INSERT INTO DEPARTMENT VALUES( 'Research',5,'333445555','1988-05-22');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES( 'Administration',4,'987654321','1995-01-01');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES( 'Headquarters',1,'888665555','1981-06-19');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE;
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| Fname    | Minit | Lname   | Ssn       | Bdate      | Address                  | Gender | Salary   | Super_ssn | Dno |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| John     | B     | Smith   | 123456789 | 1965-01-09 | 731 Fondren, Houston, TX | M      | 30000.00 | 333445555 |   5 |
+| Franklin | T     | Wong    | 333445555 | 1955-12-08 | 638 Voss, Houston, TX    | M      | 40000.00 | 888665555 |   5 |
+| Joyce    | A     | English | 453453453 | 1972-07-31 | 5631 Rice, Houston, TX   | F      | 25000.00 | 333445555 |   5 |
+| Ramesh   | K     | Narayan | 666884444 | 1962-09-15 | 975 Fire Oak, Humble, TX | M      | 38000.00 | 333445555 |   5 |
+| James    | E     | Borg    | 888665555 | 1937-11-10 | 450 Stone, Houston, TX   | M      | 55000.00 | NULL      |   1 |
+| Jennifer | S     | Wallace | 987654321 | 1941-06-20 | 291 Berry, Bellaire, TX  | F      | 43000.00 | 888665555 |   4 |
+| Ahmad    | V     | Jabbar  | 987987987 | 1969-03-29 | 980 Dallas, Houston, TX  | M      | 25000.00 | 987654321 |   4 |
+| Alicia   | J     | Zelaya  | 999887777 | 1968-01-19 | 3321 Castle, Spring, TX  | F      | 25000.00 | 987654321 |   4 |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPARTMENT;
++----------------+---------+-----------+----------------+
+| Dname          | Dnumber | Mgr_ssn   | Mgr_start_date |
++----------------+---------+-----------+----------------+
+| Headquarters   |       1 | 888665555 | 1981-06-19     |
+| Administration |       4 | 987654321 | 1995-01-01     |
+| Research       |       5 | 333445555 | 1988-05-22     |
++----------------+---------+-----------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Bdate, Address
+    -> FROM EMPLOYEE
+    -> WHERE Fname = ‘John’ AND Minit = ‘B’ AND Lname = ‘Smith’;
+ERROR 1054 (42S22): Unknown column '‘John’' in 'where clause'
+mysql> SELECT Bdate, Address
+    -> FROM EMPLOYEE
+    -> WHERE Fname = 'John' AND Minit = 'B' AND Lname = 'Smith';
++------------+--------------------------+
+| Bdate      | Address                  |
++------------+--------------------------+
+| 1965-01-09 | 731 Fondren, Houston, TX |
++------------+--------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Fname, Lname, Address
+    -> FROM EMPLOYEE, DEPARTMENT
+    -> WHERE Dname ='Research' AND Dnumber = Dno;
++----------+---------+--------------------------+
+| Fname    | Lname   | Address                  |
++----------+---------+--------------------------+
+| John     | Smith   | 731 Fondren, Houston, TX |
+| Franklin | Wong    | 638 Voss, Houston, TX    |
+| Joyce    | English | 5631 Rice, Houston, TX   |
+| Ramesh   | Narayan | 975 Fire Oak, Humble, TX |
++----------+---------+--------------------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT E.Fname, E.Lname, S.Fname, S.Lname
+    -> FROM EMPLOYEE AS E, EMPLOYEE AS S
+    -> WHERE E.Super_ssn = S.Ssn;
++----------+---------+----------+---------+
+| Fname    | Lname   | Fname    | Lname   |
++----------+---------+----------+---------+
+| John     | Smith   | Franklin | Wong    |
+| Franklin | Wong    | James    | Borg    |
+| Joyce    | English | Franklin | Wong    |
+| Ramesh   | Narayan | Franklin | Wong    |
+| Jennifer | Wallace | James    | Borg    |
+| Ahmad    | Jabbar  | Jennifer | Wallace |
+| Alicia   | Zelaya  | Jennifer | Wallace |
++----------+---------+----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE;
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| Fname    | Minit | Lname   | Ssn       | Bdate      | Address                  | Gender | Salary   | Super_ssn | Dno |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| John     | B     | Smith   | 123456789 | 1965-01-09 | 731 Fondren, Houston, TX | M      | 30000.00 | 333445555 |   5 |
+| Franklin | T     | Wong    | 333445555 | 1955-12-08 | 638 Voss, Houston, TX    | M      | 40000.00 | 888665555 |   5 |
+| Joyce    | A     | English | 453453453 | 1972-07-31 | 5631 Rice, Houston, TX   | F      | 25000.00 | 333445555 |   5 |
+| Ramesh   | K     | Narayan | 666884444 | 1962-09-15 | 975 Fire Oak, Humble, TX | M      | 38000.00 | 333445555 |   5 |
+| James    | E     | Borg    | 888665555 | 1937-11-10 | 450 Stone, Houston, TX   | M      | 55000.00 | NULL      |   1 |
+| Jennifer | S     | Wallace | 987654321 | 1941-06-20 | 291 Berry, Bellaire, TX  | F      | 43000.00 | 888665555 |   4 |
+| Ahmad    | V     | Jabbar  | 987987987 | 1969-03-29 | 980 Dallas, Houston, TX  | M      | 25000.00 | 987654321 |   4 |
+| Alicia   | J     | Zelaya  | 999887777 | 1968-01-19 | 3321 Castle, Spring, TX  | F      | 25000.00 | 987654321 |   4 |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM DEPARTMENT;
++----------------+---------+-----------+----------------+
+| Dname          | Dnumber | Mgr_ssn   | Mgr_start_date |
++----------------+---------+-----------+----------------+
+| Headquarters   |       1 | 888665555 | 1981-06-19     |
+| Administration |       4 | 987654321 | 1995-01-01     |
+| Research       |       5 | 333445555 | 1988-05-22     |
++----------------+---------+-----------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Ssn, Dname
+    -> FROM EMPLOYEE, DEPARTMENT;
++-----------+----------------+
+| Ssn       | Dname          |
++-----------+----------------+
+| 123456789 | Research       |
+| 123456789 | Headquarters   |
+| 123456789 | Administration |
+| 333445555 | Research       |
+| 333445555 | Headquarters   |
+| 333445555 | Administration |
+| 453453453 | Research       |
+| 453453453 | Headquarters   |
+| 453453453 | Administration |
+| 666884444 | Research       |
+| 666884444 | Headquarters   |
+| 666884444 | Administration |
+| 888665555 | Research       |
+| 888665555 | Headquarters   |
+| 888665555 | Administration |
+| 987654321 | Research       |
+| 987654321 | Headquarters   |
+| 987654321 | Administration |
+| 987987987 | Research       |
+| 987987987 | Headquarters   |
+| 987987987 | Administration |
+| 999887777 | Research       |
+| 999887777 | Headquarters   |
+| 999887777 | Administration |
++-----------+----------------+
+24 rows in set (0.01 sec)
+
+mysql> SELECT Ssn
+    -> FROM EMPLOYEE;
++-----------+
+| Ssn       |
++-----------+
+| 123456789 |
+| 333445555 |
+| 453453453 |
+| 666884444 |
+| 888665555 |
+| 987654321 |
+| 987987987 |
+| 999887777 |
++-----------+
+8 rows in set (0.01 sec)
+
+mysql> SELECT Fname, Lname
+    -> FROM EMPLOYEE
+    -> WHERE Address LIKE ‘%Houston,TX%’;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%Houston,TX%’' at line 3
+mysql> SELECT Fname, Lname
+    -> FROM EMPLOYEE
+    -> WHERE Address LIKE '%Houston,TX%';
+Empty set (0.00 sec)
+
+mysql> SELECT Fname, Lname FROM EMPLOYEE WHERE Address LIKE '%Houston, TX%';
++----------+---------+
+| Fname    | Lname   |
++----------+---------+
+| John     | Smith   |
+| Franklin | Wong    |
+| Joyce    | English |
+| James    | Borg    |
+| Ahmad    | Jabbar  |
++----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT ALL Salary
+    -> FROM EMPLOYEE;
++----------+
+| Salary   |
++----------+
+| 30000.00 |
+| 40000.00 |
+| 25000.00 |
+| 38000.00 |
+| 55000.00 |
+| 43000.00 |
+| 25000.00 |
+| 25000.00 |
++----------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT Salary
+    -> FROM EMPLOYEE;
++----------+
+| Salary   |
++----------+
+| 30000.00 |
+| 40000.00 |
+| 25000.00 |
+| 38000.00 |
+| 55000.00 |
+| 43000.00 |
++----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM EMPLOYEE
+    -> WHERE (Salary BETWEEN 30000 AND 40000) AND Dno = 5;
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| Fname    | Minit | Lname   | Ssn       | Bdate      | Address                  | Gender | Salary   | Super_ssn | Dno |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| John     | B     | Smith   | 123456789 | 1965-01-09 | 731 Fondren, Houston, TX | M      | 30000.00 | 333445555 |   5 |
+| Franklin | T     | Wong    | 333445555 | 1955-12-08 | 638 Voss, Houston, TX    | M      | 40000.00 | 888665555 |   5 |
+| Ramesh   | K     | Narayan | 666884444 | 1962-09-15 | 975 Fire Oak, Humble, TX | M      | 38000.00 | 333445555 |   5 |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Fname, Lname
+    -> FROM EMPLOYEE
+    -> WHERE Bdate LIKE '_ _ 7 _ _ _ _ _ _ _';
+Empty set (0.00 sec)
+
+mysql> SELECT Fname, Lname FROM EMPLOYEE WHERE Bdate LIKE '__7_______';
++-------+---------+
+| Fname | Lname   |
++-------+---------+
+| Joyce | English |
++-------+---------+
+1 row in set (0.00 sec)
+
+mysql> exit;
+Bye
