@@ -1,0 +1,2 @@
+initital content
+this is the contents of the file to be appended at the end

@@ -1,0 +1,3 @@
+1. Write a shell script to find the largest of them
+
+2. Write a shell script to accept a filename as input and check whether the user has write permissions on the file, if yes, it prompts the user to type a message and which then gets appended to the mentioned file.
