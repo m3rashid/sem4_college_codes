@@ -1,0 +1,14 @@
+1. write a shell script to accept a number from the keyboard and calculate the factorial of that number
+
+2. Write a shell script to accept a number and print sum of all the digits of that number
+  eg : if number is 12345 then sum of digits is 15
+
+3. Write a shell script to accept a number and print product of all the digits of that number
+  eg : if number is 12345 then sum of digits is 120
+
+4. Write a shell script and print the number in reversed order
+
+5. Write a shell script to accept a number and check whether it is a palindrome or not
+  eg : if number is 1221 then it is a palindrome
+
+5. Write a shell script to remove all the temporary files from your recent working directory

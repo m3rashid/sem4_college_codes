@@ -1,0 +1,257 @@
+DESCRIBE Client_Master
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| ClientNo   | varchar(6)    | NO   | PRI | NULL    |       |
+| ClientName | varchar(20)   | NO   |     | NULL    |       |
+| Address1   | varchar(30)   | NO   |     | NULL    |       |
+| Address2   | varchar(30)   | YES  |     | NULL    |       |
+| City       | varchar(15)   | NO   |     | NULL    |       |
+| PinCode    | int           | NO   |     | NULL    |       |
+| State      | varchar(15)   | NO   |     | NULL    |       |
+| BalDue     | decimal(10,2) | NO   |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+
+DESCRIBE Product_Master
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| ProductNo   | varchar(6)    | NO   | PRI | NULL    |       |
+| ProductName | varchar(20)   | NO   |     | NULL    |       |
+| Quantity    | int           | NO   |     | NULL    |       |
+| QtyOnHand   | int           | NO   |     | NULL    |       |
+| Tax         | int           | NO   |     | NULL    |       |
+| CostPrice   | decimal(10,2) | NO   |     | NULL    |       |
+| SalePrice   | decimal(10,2) | NO   |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+
+DESCRIBE DEPARTMENT
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| Dname          | varchar(15) | NO   | UNI | NULL    |       |
+| Dnumber        | int         | NO   | PRI | NULL    |       |
+| Mgr_ssn        | char(9)     | NO   | MUL | NULL    |       |
+| Mgr_start_date | date        | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+
+DESCRIBE EMPLOYEE
++-----------+---------------+------+-----+---------+-------+
+| Field     | Type          | Null | Key | Default | Extra |
++-----------+---------------+------+-----+---------+-------+
+| Fname     | varchar(15)   | YES  |     | NULL    |       |
+| Minit     | char(1)       | YES  |     | NULL    |       |
+| Lname     | varchar(15)   | NO   |     | NULL    |       |
+| Ssn       | char(9)       | NO   | PRI | NULL    |       |
+| Bdate     | date          | YES  |     | NULL    |       |
+| Address   | varchar(30)   | YES  |     | NULL    |       |
+| Gender    | char(1)       | YES  |     | NULL    |       |
+| Salary    | decimal(10,2) | YES  |     | NULL    |       |
+| Super_ssn | char(9)       | YES  |     | NULL    |       |
+| Dno       | int           | NO   |     | NULL    |       |
++-----------+---------------+------+-----+---------+-------+
+
+CREATE TABLE salesman_master(
+  salesmanno varchar(6),
+  salesmanname varchar(20),
+  address1 varchar(30),
+  address2 varchar(30),
+  city varchar(20),
+  pincode int(8),
+  state varchar(20),
+  salamt int(8),
+  tgttoget int(6),
+  ytdsales int(6),
+  remarks varchar(60)
+);
+
+INSERT INTO salesman_master VALUES
+  ('S00001', 'Aman', 'A/14', 'Worli', 'Mumbai', 400002, 'Maharashtra', 3000, 100, 50, 'Good'),
+  ('S00002', 'Omkar', '65', 'Nariman', 'Mumbai', 400001, 'Maharashtra', 3000, 200, 100, 'Good'),
+  ('S00003', 'Raj', 'P-7', 'Bandra', 'Mumbai', 400032, 'Maharashtra', 3000, 200, 100, 'Good'),
+  ('S00004', 'Ashish', 'A/5', 'Juhu', 'Mumbai', 400044, 'Maharashtra', 3500, 200, 150, 'Good');
+
+DESCRIBE salesman_master
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| salesmanno   | varchar(6)  | YES  |     | NULL    |       |
+| salesmanname | varchar(20) | YES  |     | NULL    |       |
+| address1     | varchar(30) | YES  |     | NULL    |       |
+| address2     | varchar(30) | YES  |     | NULL    |       |
+| city         | varchar(20) | YES  |     | NULL    |       |
+| pincode      | int         | YES  |     | NULL    |       |
+| state        | varchar(20) | YES  |     | NULL    |       |
+| salamt       | int         | YES  |     | NULL    |       |
+| tgttoget     | int         | YES  |     | NULL    |       |
+| ytdsales     | int         | YES  |     | NULL    |       |
+| remarks      | varchar(60) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+
+SELECT * FROM Client_Master;
++----------+-----------------+-----------+-----------+-----------+---------+-------------+---------+
+| ClientNo | ClientName      | Address1  | Address2  | City      | PinCode | State       | BalDue  |
++----------+-----------------+-----------+-----------+-----------+---------+-------------+---------+
+| C00001   | Ivan Bayross    | Address 1 | Address 2 | Mumbai    |  400001 | Maharashtra | 1000.00 |
+| C00002   | Mamta Muzamdaar | Address 1 | Address 2 | Madras    | 7800001 | Tamil Nadu  |    0.00 |
+| C00003   | Chhaya Bankar   | Address 1 | Address 2 | Mumbai    |  400057 | Maharashtra | 5000.00 |
+| C00004   | Ashwini Joshi   | Address 1 | Address 2 | bangalore |  560001 | Karnataka   |    0.00 |
+| C00005   | Hansei Colaco   | Address 1 | Address 2 | Bangalore |  400060 | Karnataka   | 2000.00 |
+| C00006   | Deepak Sharma   | Address 1 | Address 2 | Mangalore |  560050 | Karnataka   |    0.00 |
++----------+-----------------+-----------+-----------+-----------+---------+-------------+---------+
+
+SELECT * FROM DEPARTMENT;
++----------------+---------+-----------+----------------+
+| Dname          | Dnumber | Mgr_ssn   | Mgr_start_date |
++----------------+---------+-----------+----------------+
+| Headquarters   |       1 | 888665555 | 1981-06-19     |
+| Administration |       4 | 987654321 | 1995-01-01     |
+| Research       |       5 | 333445555 | 1988-05-22     |
++----------------+---------+-----------+----------------+
+
+SELECT * FROM EMPLOYEE;
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| Fname    | Minit | Lname   | Ssn       | Bdate      | Address                  | Gender | Salary   | Super_ssn | Dno |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+| John     | B     | Smith   | 123456789 | 1965-01-09 | 731 Fondren, Houston, TX | M      | 30000.00 | 333445555 |   5 |
+| Franklin | T     | Wong    | 333445555 | 1955-12-08 | 638 Voss, Houston, TX    | M      | 40000.00 | 888665555 |   5 |
+| Joyce    | A     | English | 453453453 | 1972-07-31 | 5631 Rice, Houston, TX   | F      | 25000.00 | 333445555 |   5 |
+| Ramesh   | K     | Narayan | 666884444 | 1962-09-15 | 975 Fire Oak, Humble, TX | M      | 38000.00 | 333445555 |   5 |
+| James    | E     | Borg    | 888665555 | 1937-11-10 | 450 Ston e, Houston, TX  | M      | 55000.00 | NULL      |   1 |
+| Jennifer | S     | Wallace | 987654321 | 1941-06-20 | 29 1 Berry, Bellaire, TX | F      | 43000.00 | 888665555 |   4 |
+| Ahmad    | V     | Jabbar  | 987987987 | 1969-03-29 | 980 Dallas, Houston, TX  | M      | 25000.00 | 987654321 |   4 |
+| Alicia   | J     | Zelaya  | 999887777 | 1968-01-19 | 3321 Castle, Spring, TX  | F      | 25000.00 | 987654321 |   4 |
++----------+-------+---------+-----------+------------+--------------------------+--------+----------+-----------+-----+
+
+SELECT * FROM Product_Master;
++-----------+--------------+----------+-----------+-----+-----------+-----------+
+| ProductNo | ProductName  | Quantity | QtyOnHand | Tax | CostPrice | SalePrice |
++-----------+--------------+----------+-----------+-----+-----------+-----------+
+| P00001    | T-Shirts     |        5 |       200 |  50 |    350.00 |    250.00 |
+| P0345     | Shirts       |        6 |       150 |  50 |    300.00 |    350.00 |
+| P06734    | Cotton Jeans |        6 |       100 |  20 |    600.00 |    450.00 |
+| P07865    | Jeans        |        5 |       100 |  20 |    750.00 |    500.00 |
+| P07868    | Trousers     |        2 |       150 |  50 |    950.00 |    550.00 |
+| P07878    | Denim Shirts |        4 |       100 |  40 |    350.00 |    250.00 |
+| P07885    | Pull Overs   |        3 |       140 |  50 |    850.00 |    550.00 |
+| P07887    | Lycra Tops   |        5 |        70 |  30 |    300.00 |    175.00 |
+| P07888    | Skirts       |        5 |        75 |  30 |    450.00 |    300.00 |
++-----------+--------------+----------+-----------+-----+-----------+-----------+
+
+SELECT * FROM salesman_master;
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+| salesmanno | salesmanname | address1 | address2 | city   | pincode | state       | salamt | tgttoget | ytdsales | remarks |
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+| S00001     | Aman         | A/14     | Worli    | Mumbai |  400002 | Maharashtra |   3000 |      100 |       50 | Good    |
+| S00002     | Omkar        | 65       | Nariman  | Mumbai |  400001 | Maharashtra |   3000 |      200 |      100 | Good    |
+| S00003     | Raj          | P-7      | Bandra   | Mumbai |  400032 | Maharashtra |   3000 |      200 |      100 | Good    |
+| S00004     | Ashish       | A/5      | Juhu     | Mumbai |  400044 | Maharashtra |   3500 |      200 |      150 | Good    |
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+
+Q5 a. Delete all the salesman from the Salesman_Master whose salaries are 
+equal to 3500.
+DELETE FROM salesman_master WHERE salamt = 3500;
+Query OK, 1 row affected (0.02 sec)
+
+SELECT * FROM salesman_master;
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+| salesmanno | salesmanname | address1 | address2 | city   | pincode | state       | salamt | tgttoget | ytdsales | remarks |
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+| S00001     | Aman         | A/14     | Worli    | Mumbai |  400002 | Maharashtra |   3000 |      100 |       50 | Good    |
+| S00002     | Omkar        | 65       | Nariman  | Mumbai |  400001 | Maharashtra |   3000 |      200 |      100 | Good    |
+| S00003     | Raj          | P-7      | Bandra   | Mumbai |  400032 | Maharashtra |   3000 |      200 |      100 | Good    |
++------------+--------------+----------+----------+--------+---------+-------------+--------+----------+----------+---------+
+
+Q5 b. Delete all products from Product_Master where the QtyOnHand is equal  to 100
+DELETE FROM Product_Master WHERE QtyOnHand = 100;
+Query OK, 3 rows affected (0.01 sec)
+
+SELECT * FROM Product_Master;
++-----------+-------------+----------+-----------+-----+-----------+-----------+
+| ProductNo | ProductName | Quantity | QtyOnHand | Tax | CostPrice | SalePrice |
++-----------+-------------+----------+-----------+-----+-----------+-----------+
+| P00001    | T-Shirts    |        5 |       200 |  50 |    350.00 |    250.00 |
+| P0345     | Shirts      |        6 |       150 |  50 |    300.00 |    350.00 |
+| P07868    | Trousers    |        2 |       150 |  50 |    950.00 |    550.00 |
+| P07885    | Pull Overs  |        3 |       140 |  50 |    850.00 |    550.00 |
+| P07887    | Lycra Tops  |        5 |        70 |  30 |    300.00 |    175.00 |
+| P07888    | Skirts      |        5 |        75 |  30 |    450.00 |    300.00 |
++-----------+-------------+----------+-----------+-----+-----------+-----------+
+
+Q5 c. Delete from Client where the column state = ’Maharashtra’
+DELETE FROM  Client_Master WHERE State = 'Maharashtra'; 
+Query OK, 2 rows affected (0.02 sec)
+
+SELECT * FROM Client_Master;
++----------+-----------------+-----------+-----------+-----------+---------+------------+---------+
+| ClientNo | ClientName      | Address1  | Address2  | City      | PinCode | State      | BalDue  |
++----------+-----------------+-----------+-----------+-----------+---------+------------+---------+
+| C00002   | Mamta Muzamdaar | Address 1 | Address 2 | Madras    | 7800001 | Tamil Nadu |    0.00 |
+| C00004   | Ashwini Joshi   | Address 1 | Address 2 | bangalore |  560001 | Karnataka  |    0.00 |
+| C00005   | Hansei Colaco   | Address 1 | Address 2 | Bangalore |  400060 | Karnataka  | 2000.00 |
+| C00006   | Deepak Sharma   | Address 1 | Address 2 | Mangalore |  560050 | Karnataka  |    0.00 |
++----------+-----------------+-----------+-----------+-----------+---------+------------+---------+
+
+Q6 d. Add a column called ‘Telephone’ of data type ‘number’ and size ‘10’ to the Client_Master table
+ALTER TABLE Client_Master ADD COLUMN Telephone int(10); 
+Query OK, 0 rows affected, 1 warning (0.07 sec)
+
+DESCRIBE Client_Master;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| ClientNo   | varchar(6)    | NO   | PRI | NULL    |       |
+| ClientName | varchar(20)   | NO   |     | NULL    |       |
+| Address1   | varchar(30)   | NO   |     | NULL    |       |
+| Address2   | varchar(30)   | YES  |     | NULL    |       |
+| City       | varchar(15)   | NO   |     | NULL    |       |
+| PinCode    | int           | NO   |     | NULL    |       |
+| State      | varchar(15)   | NO   |     | NULL    |       |
+| BalDue     | decimal(10,2) | NO   |     | NULL    |       |
+| Telephone  | int           | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+
+Q6 e. Change the size ODF SellPrice column Product_Master to 10,2
+ALTER TABLE Product_Master MODIFY COLUMN SalePrice DECIMAL(10,2);
+Query OK, 0 rows affected (0.16 sec)
+
+DESCRIBE Product_Master;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| ProductNo   | varchar(6)    | NO   | PRI | NULL    |       |
+| ProductName | varchar(20)   | NO   |     | NULL    |       |
+| Quantity    | int           | NO   |     | NULL    |       |
+| QtyOnHand   | int           | NO   |     | NULL    |       |
+| Tax         | int           | NO   |     | NULL    |       |
+| CostPrice   | decimal(10,2) | NO   |     | NULL    |       |
+| SalePrice   | decimal(10,2) | YES  |     | NULL    |       |
++-------------+---------------+------+-----+---------+-------+
+
+Q7 f. Destroy table Client_Master along with its data.
+DROP TABLE Client_Master;
+Query OK, 0 rows affected (0.05 sec)
+
+SHOW TABLES;
++-------------------------------------+
+| Tables_in_20BCS033_MD_Rashid_Husain |
++-------------------------------------+
+| DEPARTMENT                          |
+| EMPLOYEE                            |
+| Product_Master                      |
+| salesman_master                     |
++-------------------------------------+
+
+Q8 g. Change the name of the Salesman_Master to sman_mast.  
+Alter Table salesman_master Rename sman_mast;
+Query OK, 0 rows affected (0.05 sec)
+
+SHOW TABLES;
++-------------------------------------+
+| Tables_in_20BCS033_MD_Rashid_Husain |
++-------------------------------------+
+| DEPARTMENT                          |
+| EMPLOYEE                            |
+| Product_Master                      |
+| sman_mast                           |
++-------------------------------------+

@@ -1,0 +1,5 @@
+1. Write a shell script to print "Good morning", "good afternoon". "good evening" and "good night" on the basis of system time
+
+2. Write a shell script to convert a decimal number to binary, octal and hexadecimal without using any control statements
+
+3. Write a shell script to accept a filename as input and remove all the lines containing the word "jamia" from that file

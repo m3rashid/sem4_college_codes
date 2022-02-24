@@ -21,13 +21,13 @@ struct completed
 };
 
 vector<process> ready;
-vector<process> waiting;
 vector<process> running;
 
 void interchange(process *a, process *b);
 void sortProcess(vector<process> &p);
 void printProces(vector<process> &p);
 void printCompleted(vector<completed> &c);
+bool bTimeSort(process a, process b);
 
 int main()
 {
@@ -38,16 +38,26 @@ int main()
 
   vector<process> p;
   vector<completed> c;
+  vector<process> waiting;
+
+  /*
+    0 8
+    1 4
+    2 2
+    3 1
+    4 3
+    5 2
+  */
 
   int at, bt;
   for (int i = 0; i < count; i++)
   {
-    cout << "\nFor process " << i;
+    cout << "\nFor process " << i + 1;
     cout << ",\nEnter <arrival_time(int)> <burst_time(int)>: ";
     cin >> at >> bt;
 
     process temp;
-    temp.process_id = i;
+    temp.process_id = i + 1;
     temp.arrival_time = at;
     temp.burst_time = bt;
     temp.remaining_time = bt;
@@ -57,20 +67,25 @@ int main()
     p.push_back(temp);
   }
 
-  cout << "\nInitially\n";
-  printProces(p);
   sortProcess(p);
+  cout << "\nAfter sort\n";
+  printProces(p);
 
-  while (p.size() >= 1)
+  cout << "\n\n";
+
+  while (p.size() > 0)
   {
     for (int i = 0; i < p.size() - 1; i++)
     {
+      sort(p.begin(), p.begin() + i, bTimeSort);
+
       int rm_diff = p[i + 1].remaining_time - p[i].remaining_time;
       if (rm_diff < 0)
       {
         interchange(&p[i], &p[i + 1]);
         continue;
       }
+
       if (rm_diff < p[i].remaining_time)
       {
         p[i].remaining_time -= rm_diff;
@@ -83,17 +98,17 @@ int main()
         temp.end_time = p[i].arrival_time + p[i].burst_time;
         c.push_back(temp);
         p.erase(p.begin() + i);
-        cout << "one process done\n";
+        cout << "\none process done";
+        cout << "\nProcess " << temp.p_id << ": ";
+        cout << "\nStart Time: " << temp.start_time;
+        cout << "\nEnd Time: " << temp.end_time << "\n";
       }
     }
   }
 
-  cout << "\nAfter completion\n";
-  cout << "\nProcess\n";
-  printProces(p);
-
-  cout << "\nReady Queue\n";
-  printProces(ready);
+  // cout << "\nAfter completion\n";
+  // cout << "\nProcess\n";
+  // printProces(p);
 
   cout << "\ncompleted Queue\n";
   printCompleted(c);
@@ -150,4 +165,9 @@ void printCompleted(vector<completed> &c)
     cout << "\nStart Time: " << c[i].start_time;
     cout << "\nEnd Time: " << c[i].end_time << "\n";
   }
+}
+
+bool bTimeSort(process a, process b)
+{
+  return a.burst_time < b.burst_time;
 }
