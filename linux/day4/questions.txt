@@ -1,0 +1,2 @@
+Q1. write a shell script which reports name and sizes of all the files in a directory whose size exceeding 100 bytes. the filenames should be printed in descending order of their size, the total number of such files should also be reported
+
